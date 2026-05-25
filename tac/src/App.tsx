@@ -11,7 +11,7 @@ import './App.css'
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Tac_Website">
       <div className="min-h-screen flex flex-col bg-slate-50">
         <Navbar />
         <div className="flex-1">
