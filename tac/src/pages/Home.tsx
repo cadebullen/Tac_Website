@@ -174,8 +174,6 @@ export default function Home() {
               Start a Project
             </Link>
           </div>
-
-          <p className="mt-10 text-xs tracking-[0.24em] uppercase text-slate-300/80">Scroll to explore</p>
         </div>
       </section>
 
