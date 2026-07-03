@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "node -e \"require('fs').readdirSync('dist').filter(f=>f.endsWith('.mp4')).forEach(f=>require('fs').unlinkSync('dist/'+f))\" && gh-pages -d dist"
+    "deploy": "node -e \"const fs=require('fs');const p=['dist/projects/result.tif','dist/projects/cloudR_potree/pointclouds/cloudR_viewer/octree.bin','dist/projects/cloudR_potree/pointclouds/cloudR_viewer'];p.forEach(x=>fs.rmSync(x,{recursive:true,force:true}));fs.readdirSync('dist').filter(f=>f.endsWith('.mp4')).forEach(f=>fs.rmSync('dist/'+f,{force:true}));\" && gh-pages -d dist"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
