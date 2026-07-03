@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModelMetadata version="1">
+    <!--Spatial Reference System-->
+    <SRS>EPSG:6586+6360</SRS>
+    <GeoidFileName>us_noaa_g2018u0.tif</GeoidFileName>
+    <!--Origin in Spatial Reference System-->
+    <SRSOrigin>1014540.4815782625,16629256.229368484,368.23680222427618</SRSOrigin>
+    <Texture>
+        <ColorSource>Visible</ColorSource>
+    </Texture>
+</ModelMetadata>

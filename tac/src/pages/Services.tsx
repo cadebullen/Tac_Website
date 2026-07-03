@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 export default function Services() {
   const services = [
     {
@@ -104,40 +106,111 @@ export default function Services() {
     },
   ]
 
-  return (
-    <main className="max-w-6xl mx-auto px-6 py-20">
-      <h1 className="text-4xl font-extrabold text-slate-800 mb-4">Field Data Collection Services</h1>
-      <div className="w-16 h-1 bg-amber-400 mb-6 rounded"></div>
-      <p className="text-slate-600 text-lg leading-relaxed mb-4 max-w-3xl">
-        Precision field data collection using survey-grade GPS/GNSS, UAV, and LiDAR technology.
-      </p>
-      <p className="text-slate-500 text-sm leading-relaxed mb-16 max-w-3xl">
-        All data delivered in client-specified formats (CSV, DWG, SHP, LAS, GeoTIFF, MP4, etc.).
-        No professional seals or certifications included — raw field data and documentation only.
-      </p>
+  const [activeIndex, setActiveIndex] = useState(0)
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {services.map((s) => (
-          <div
-            key={s.title}
-            className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 hover:shadow-md transition-shadow"
-          >
-            <div className="text-4xl mb-4">{s.icon}</div>
-            <h2 className="text-xl font-bold text-slate-800 mb-3">{s.title}</h2>
-            <p className="text-slate-600 leading-relaxed text-sm">{s.description}</p>
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIndex((current) => (current + 1) % services.length)
+    }, 5000)
+
+    return () => clearInterval(timer)
+  }, [services.length])
+
+  const activeService = services[activeIndex]
+
+  const showPrevious = () => {
+    setActiveIndex((current) => (current - 1 + services.length) % services.length)
+  }
+
+  const showNext = () => {
+    setActiveIndex((current) => (current + 1) % services.length)
+  }
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowLeft') showPrevious()
+      if (event.key === 'ArrowRight') showNext()
+    }
+
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [services.length])
+
+  return (
+    <main className="max-w-6xl mx-auto px-6 md:px-10 py-16 md:py-20 text-slate-100">
+      <section className="relative overflow-hidden rounded-3xl border border-slate-900 bg-[linear-gradient(145deg,rgba(15,17,22,0.96),rgba(7,9,13,0.98))] p-8 md:p-12 mb-14 md:mb-16">
+        <div className="pointer-events-none absolute -top-16 right-[-28px] h-44 w-44 rounded-full bg-cyan-300/10 blur-3xl" />
+        <p className="text-xs tracking-[0.2em] uppercase text-slate-400 mb-4">Services</p>
+        <h1 className="text-4xl md:text-6xl font-semibold tracking-tight text-white mb-4">Field data collection built for production teams.</h1>
+        <p className="text-slate-300 max-w-3xl leading-relaxed text-base md:text-lg">
+          Survey-grade GPS/GNSS, UAV, and LiDAR services designed to move projects from site capture to design-ready outputs.
+        </p>
+      </section>
+
+      <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/5 backdrop-blur-xl shadow-[0_10px_50px_rgba(0,0,0,0.45)] p-8 md:p-10 mb-14 md:mb-16">
+        <div className="pointer-events-none absolute -top-24 -right-20 h-64 w-64 rounded-full bg-cyan-300/12 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-20 -left-16 h-56 w-56 rounded-full bg-amber-300/12 blur-3xl" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/10 via-white/0 to-white/5" />
+
+        <div className="relative flex items-center justify-between gap-4 mb-8">
+          <h2 className="text-2xl font-bold text-slate-100">Service Highlights</h2>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={showPrevious}
+              className="h-10 w-10 rounded-full border border-white/25 bg-white/10 text-slate-100 hover:border-amber-300/70 hover:bg-white/20 transition-colors"
+              aria-label="Previous service"
+            >
+              <svg className="mx-auto h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              onClick={showNext}
+              className="h-10 w-10 rounded-full border border-white/25 bg-white/10 text-slate-100 hover:border-amber-300/70 hover:bg-white/20 transition-colors"
+              aria-label="Next service"
+            >
+              <svg className="mx-auto h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
           </div>
-        ))}
+        </div>
+
+        <div className="relative rounded-2xl border border-white/20 bg-white/10 backdrop-blur-lg p-8 min-h-[300px] shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]">
+          <div className="text-5xl mb-4">{activeService.icon}</div>
+          <h3 className="text-2xl font-bold text-slate-100 mb-3">{activeService.title}</h3>
+          <p className="text-slate-200/90 leading-relaxed text-base max-w-3xl">{activeService.description}</p>
+        </div>
+
+        <div className="relative mt-6 flex flex-wrap gap-2">
+          {services.map((service, index) => (
+            <button
+              key={service.title}
+              type="button"
+              onClick={() => setActiveIndex(index)}
+              className={`h-2.5 rounded-full transition-all ${
+                index === activeIndex
+                  ? 'w-8 bg-amber-300 shadow-[0_0_18px_rgba(251,191,36,0.65)]'
+                  : 'w-2.5 bg-white/30 hover:bg-white/50'
+              }`}
+              aria-label={`View ${service.title}`}
+            />
+          ))}
+        </div>
       </div>
 
       {/* CTA */}
-      <div className="mt-20 bg-slate-800 rounded-2xl px-10 py-12 text-center">
+      <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/5 backdrop-blur-xl px-10 py-12 text-center shadow-[0_10px_50px_rgba(0,0,0,0.45)]">
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/10 via-transparent to-white/10" />
         <h2 className="text-3xl font-extrabold text-white mb-4">Ready to get started?</h2>
         <p className="text-slate-300 mb-8 max-w-xl mx-auto">
           Contact us today to discuss your project requirements and receive a free quote.
         </p>
         <a
           href="/contact"
-          className="inline-block bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold px-8 py-3 rounded-full transition-colors"
+          className="inline-block bg-amber-300 hover:bg-amber-200 text-slate-950 font-bold px-8 py-3 rounded-full transition-colors shadow-[0_0_20px_rgba(251,191,36,0.35)]"
         >
           Get in Touch
         </a>

@@ -1,0 +1,4 @@
+# Large local data assets (not suitable for GitHub)
+tac/data/projects/*.las
+tac/public/projects/result.tif
+tac/public/projects/cloudR_potree/pointclouds/cloudR_viewer/octree.bin

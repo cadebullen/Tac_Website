@@ -10,9 +10,11 @@ import Services from './pages/Services'
 import './App.css'
 
 function App() {
+  const routerBase = import.meta.env.DEV ? undefined : '/Tac_Website'
+
   return (
-    <BrowserRouter basename="/Tac_Website">
-      <div className="min-h-screen flex flex-col bg-slate-50">
+    <BrowserRouter basename={routerBase}>
+      <div className="min-h-screen flex flex-col bg-black text-slate-100">
         <Navbar />
         <div className="flex-1">
           <Routes>

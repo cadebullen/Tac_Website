@@ -110,9 +110,9 @@ export default function Home() {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <main>
+    <main className="bg-black text-slate-100">
       {/* Hero */}
-      <section className="relative min-h-[90vh] flex items-center justify-center text-white overflow-hidden bg-slate-900">
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-black">
         <video
           ref={refA}
           className="absolute inset-0 w-full h-full object-cover"
@@ -135,82 +135,155 @@ export default function Home() {
           className="absolute inset-0 w-full h-full object-cover"
           style={{ zIndex: -1 }}
         />
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-slate-900/65" style={{ zIndex: 3 }} />
+        {/* Cinematic overlays */}
+        <div className="absolute inset-0 bg-black/45" style={{ zIndex: 3 }} />
+        <div
+          className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(251,191,36,0.18),transparent_35%),radial-gradient(circle_at_80%_65%,rgba(14,165,233,0.16),transparent_40%)]"
+          style={{ zIndex: 3 }}
+        />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" style={{ zIndex: 3 }} />
 
         {/* Hero content */}
-        <div className="relative max-w-3xl mx-auto px-6 text-center" style={{ zIndex: 4 }}>
-          <span className="inline-block bg-amber-400/20 text-amber-400 text-sm font-semibold px-4 py-1.5 rounded-full mb-6 tracking-wide uppercase">
+        <div className="relative max-w-6xl mx-auto w-full px-6 md:px-10" style={{ zIndex: 4 }}>
+          <span className="inline-block bg-white/10 backdrop-blur border border-white/20 text-amber-200 text-xs md:text-sm font-semibold px-4 py-1.5 rounded-full mb-7 tracking-[0.18em] uppercase">
             Field Data Collection Specialist
+
           </span>
-          <h1 className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
-            Precision &amp; Accuracy in Every Measurement
+          <h1 className="max-w-4xl text-5xl md:text-7xl lg:text-8xl font-semibold mb-6 leading-[0.95] tracking-tight text-white">
+            Precision,
+            <br />
+            engineered for
+            <br />
+            the real world.
           </h1>
-          <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto">
-            Delivering reliable field data collection, precision measurement, and geospatial
-            mapping services with over a decade of field expertise.
+          <p className="text-base md:text-xl text-slate-200/90 mb-10 max-w-2xl leading-relaxed">
+            From ground control to LiDAR deliverables, every capture is built for clean data,
+            fast decisions, and confident execution.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 mt-4 md:mt-6">
             <Link
               to="/projects"
-              className="bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold px-8 py-3 rounded-lg transition-colors"
+              className="bg-white text-black hover:bg-slate-200 font-semibold px-8 py-3 rounded-full transition-colors"
             >
-              View Projects
+              View Featured Work
             </Link>
             <Link
               to="/contact"
-              className="border border-slate-500 hover:border-amber-400 hover:text-amber-400 text-slate-300 font-medium px-8 py-3 rounded-lg transition-colors"
+              className="border border-white/40 hover:border-white hover:bg-white/10 text-white font-medium px-8 py-3 rounded-full transition-colors"
             >
-              Get in Touch
+              Start a Project
+            </Link>
+          </div>
+
+          <p className="mt-10 text-xs tracking-[0.24em] uppercase text-slate-300/80">Scroll to explore</p>
+        </div>
+      </section>
+
+      <section className="py-24 md:py-32 border-t border-slate-900">
+        <div className="max-w-6xl mx-auto px-6 md:px-10">
+          <p className="text-xs tracking-[0.22em] uppercase text-slate-400 mb-5">Built for demanding sites</p>
+          <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[1.02] font-semibold tracking-tight max-w-5xl text-white">
+            Reliable field intelligence,
+            <span className="text-slate-400"> from first shot to final deliverable.</span>
+          </h2>
+
+          <div className="mt-14 grid md:grid-cols-3 gap-5">
+            {[
+              {
+                title: 'Capture',
+                text: 'Survey-grade GNSS, UAV, and LiDAR workflows calibrated for repeatable accuracy in the field.',
+              },
+              {
+                title: 'Process',
+                text: 'Structured QA/QC and standardized processing pipelines that reduce rework and delivery risk.',
+              },
+              {
+                title: 'Deliver',
+                text: 'Client-ready outputs across CAD, GIS, and point cloud formats to plug directly into design teams.',
+              },
+            ].map((item) => (
+              <article key={item.title} className="rounded-2xl border border-slate-900 bg-[#0f1116] p-6 md:p-7">
+                <h3 className="text-2xl font-semibold text-white mb-3">{item.title}</h3>
+                <p className="text-slate-300 leading-relaxed">{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 md:py-28 border-t border-slate-900 bg-[#07090d]">
+        <div className="max-w-6xl mx-auto px-6 md:px-10">
+          <div className="rounded-3xl border border-slate-800 bg-[linear-gradient(145deg,rgba(15,17,22,0.95),rgba(10,12,17,0.98))] p-8 md:p-12">
+            <p className="text-xs tracking-[0.22em] uppercase text-slate-400 mb-5">Core Services</p>
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
+              <div>
+                <h2 className="text-3xl md:text-5xl font-semibold leading-tight text-white">
+                  Precision workflows.
+                  <br />
+                  Modern outputs.
+                </h2>
+              </div>
+              <div className="space-y-4 text-slate-300">
+                {[
+                  'Monument Recovery and Boundary Support Data',
+                  'Topographic Mapping and Surface Utility Collection',
+                  'LiDAR, Orthomosaic, and Point Cloud Deliverables',
+                  'Construction Staking and As-Built Documentation',
+                ].map((line) => (
+                  <div key={line} className="flex items-start gap-3">
+                    <span className="mt-1 h-2 w-2 rounded-full bg-amber-300" />
+                    <p>{line}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 md:py-28 border-t border-slate-900">
+        <div className="max-w-6xl mx-auto px-6 md:px-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
+            {[
+              { value: '10+', label: 'Years Experience' },
+              { value: '200+', label: 'Projects Completed' },
+              { value: '15+', label: 'Counties Covered' },
+              { value: '100%', label: 'Licensed & Insured' },
+            ].map(({ value, label }) => (
+              <div key={label}>
+                <p className="text-4xl md:text-5xl font-semibold text-white mb-1">{value}</p>
+                <p className="text-slate-400 text-sm uppercase tracking-wide">{label}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 rounded-3xl border border-slate-900 bg-[#0f1116] p-8 md:p-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+              <p className="text-xs tracking-[0.2em] uppercase text-slate-400 mb-2">Featured Dataset</p>
+              <h3 className="text-2xl md:text-3xl font-semibold text-white">Explore CloudR in 3D</h3>
+              <p className="text-slate-300 mt-2 max-w-xl">
+                Open the point cloud viewer and inspect real project geometry with a full Potree workflow.
+              </p>
+            </div>
+            <Link
+              to="/projects"
+              className="inline-flex items-center justify-center bg-amber-300 hover:bg-amber-200 text-black font-semibold px-7 py-3 rounded-full transition-colors"
+            >
+              Launch Viewer
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Quick stats */}
-      <section className="bg-slate-800 text-white">
-        <div className="max-w-6xl mx-auto px-6 py-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {[
-            { value: '10+', label: 'Years Experience' },
-            { value: '200+', label: 'Projects Completed' },
-            { value: '15+', label: 'Counties Covered' },
-            { value: '100%', label: 'Licensed & Insured' },
-          ].map(({ value, label }) => (
-            <div key={label}>
-              <p className="text-4xl font-extrabold text-amber-400 mb-2">{value}</p>
-              <p className="text-slate-300 text-sm">{label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Services overview */}
-      <section className="max-w-6xl mx-auto px-6 py-20">
-        <h2 className="text-3xl font-bold text-slate-800 mb-12 text-center">Core Services</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {[
-            {
-              icon: '📐',
-              title: 'Monument Recovery',
-              desc: 'Field location of existing monuments and as-found corners, captured with survey-grade GNSS equipment for client and engineer reference.',
-            },
-            {
-              icon: '🗺️',
-              title: 'Topographic Mapping',
-              desc: 'Detailed terrain and feature mapping for design, planning, and engineering projects.',
-            },
-            {
-              icon: '🏗️',
-              title: 'Construction Staking',
-              desc: 'Accurate layout and staking to guide construction and ensure design intent is met.',
-            },
-          ].map(({ icon, title, desc }) => (
-            <div key={title} className="bg-white border border-slate-200 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow">
-              <div className="text-4xl mb-4">{icon}</div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">{title}</h3>
-              <p className="text-slate-500">{desc}</p>
-            </div>
-          ))}
+      <section className="py-14 border-t border-slate-900">
+        <div className="max-w-6xl mx-auto px-6 md:px-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <p className="text-slate-300 text-lg">Need coverage for your next corridor, site, or utility package?</p>
+          <Link
+            to="/contact"
+            className="inline-flex items-center justify-center border border-slate-600 hover:border-white hover:bg-white/5 text-slate-100 font-medium px-6 py-2.5 rounded-full transition-colors"
+          >
+            Talk to Blue Geomatics
+          </Link>
         </div>
       </section>
     </main>
